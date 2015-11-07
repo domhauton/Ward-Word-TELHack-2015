@@ -1,56 +1,78 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+  .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-})
-
-.controller('PlaylistsCtrl', function($scope, $http) {
-  $http.get('https://sheetsu.com/apis/6cc29636').then(function(resp) {
-    console.log(resp);
-    $scope.playlists = resp.data.result;
-    // For JSON responses, resp.data contains the result
-  }, function(err) {
-    console.error('ERR', err);
-    // err.status will contain the status code
+    // Create the login modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/scenarioFinder.html', {
+      scope: $scope
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
   })
-})
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+  .controller('ScenarioFinder', function ($scope, $http) {
+    $http.get('https://sheetsu.com/apis/6cc29636').then(function (resp) {
+      $scope.playlists = resp.data.result;
+      // For JSON responses, resp.data contains the result
+    }, function (err) {
+      console.error('ERR', err);
+    })
+  })
+
+  .controller('ScenarioInfo', function ($scope, $http, $stateParams) {
+    $http.get('https://sheetsu.com/apis/6cc29636').then(function (resp) {
+      $scope.playlists = resp.data.result;
+      // For JSON responses, resp.data contains the result
+    }, function (err) {
+      console.error('ERR', err);
+    })
+  })
+
+  .controller('SoundBoardCtrl', function ($scope, $window) {
+    $scope.media = null;
+
+    $scope.model = {
+      showDelete: false,
+      showMove: false,
+      sounds: [
+        {
+          'title': 'Cow',
+          'image': 'img/animals/cow-icon.png',
+          'desc': 'Mooo',
+          'file': '/sounds/cow.mp3'
+        }
+      ]
+    };
+
+    $scope.play = function (sound) {
+
+      if ($scope.media) {
+        $scope.media.pause();
+      }
+      Console.log("I was here 1")
+      if ($window.cordova) {
+        console.log("Play called on device");
+        ionic.Platform.ready(function () {
+
+          var src = sound.file;
+          if (ionic.Platform.is('android')) {
+            src = '/android_asset/www/' + src;
+          }
+          $scope.media = new $window.Media(src);
+          $scope.media.play();
+        });
+      } else {
+        $scope.media = new Audio();
+        $scope.media.src = sound.file;
+        $scope.media.load();
+        $scope.media.play();
+      }
+    };
+  });

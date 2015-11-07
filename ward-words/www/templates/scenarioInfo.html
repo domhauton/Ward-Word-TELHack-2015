@@ -1,0 +1,24 @@
+<ion-view view-title="Playlist">
+  <ion-content>
+    <h1>Scenario Page</h1>
+    <ion-pane ng-controller="SoundBoardCtrl" >
+      <ion-content >
+
+        <ion-list show-delete="model.showDelete"
+                  show-reorder="model.showMove" >
+          <ion-item class="item-avatar item-icon-right item-remove-animate"
+                    ng-repeat="sound in model.sounds"
+                    ng-click="play(sound)" >
+            <img ng-src="{{sound.image}}"
+                 alt="" />
+            <h2 >{{ sound.title }}</h2 >
+
+            <p >{{ sound.desc }}</p >
+            <i class="icon ion-volume-high" ></i >
+          </ion-item >
+        </ion-list >
+
+      </ion-content >
+    </ion-pane >
+  </ion-content>
+</ion-view>
