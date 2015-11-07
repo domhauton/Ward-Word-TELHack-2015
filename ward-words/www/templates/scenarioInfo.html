@@ -3,21 +3,18 @@
     <h1>Scenario Page</h1>
     <ion-pane ng-controller="ScenarioInfo" >
       <ion-content >
-
         <ion-list show-delete="model.showDelete"
                   show-reorder="model.showMove" >
           <ion-item class="item-avatar item-icon-right item-remove-animate"
                     ng-repeat="sound in model.sounds"
-                    ng-click="play(sound)" >
+                    style="height: 260px">
             <img ng-src="{{sound.image}}" alt="" />
-
             <h2 >{{ sound.title }}</h2 >
 
             <p >{{ sound.desc }}</p >
-            <i class="icon ion-volume-high" ></i >
+            <a onclick="this.firstChild.play()" class="button"><audio src="{{getSoundUri(sound.title)}}"></audio><i class="icon ion-volume-high"></i></a>
           </ion-item >
         </ion-list >
-
       </ion-content >
     </ion-pane >
   </ion-content>

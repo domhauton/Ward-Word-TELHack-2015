@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
     })
   })
 
-  .controller('ScenarioInfo', function ($scope, $http, $stateParams, $window) {
+  .controller('ScenarioInfo', function ($scope, $http, $stateParams, $window, $sce) {
 
     $scope.media = null;
 
@@ -35,36 +35,16 @@ angular.module('starter.controllers', [])
       showMove: false,
       sounds: [
         {
-          'title': 'Cow',
+          'title': 'balloon',
           'image': 'img/animals/cow-icon.png',
-          'desc': 'Mooo',
-          'file': '/sounds/cow.mp3'
+          'desc': 'Electric heart diagram',
         }
       ]
     };
 
-    $scope.play = function (sound) {
-
-      if ($scope.media) {
-        $scope.media.pause();
-      }
-      console.log("I was here 1")
-      if ($window.cordova) {
-        console.log("Play called on device");
-        ionic.Platform.ready(function () {
-
-          var src = sound.file;
-          if (ionic.Platform.is('android')) {
-            src = '/android_asset/www/' + src;
-          }
-          $scope.media = new $window.Media(src);
-          $scope.media.play();
-        });
-      } else {
-        $scope.media = new Audio();
-        $scope.media.src = sound.file;
-        $scope.media.load();
-        $scope.media.play();
-      }
+    $scope.getSoundUri = function(name){
+      var foo = "https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + name + ".mp3";
+      console.log(foo);
+      return $sce.trustAsResourceUrl(foo);
     };
   });
