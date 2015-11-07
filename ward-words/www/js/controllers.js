@@ -26,16 +26,8 @@ angular.module('starter.controllers', [])
     })
   })
 
-  .controller('ScenarioInfo', function ($scope, $http, $stateParams) {
-    $http.get('https://sheetsu.com/apis/6cc29636').then(function (resp) {
-      $scope.playlists = resp.data.result;
-      // For JSON responses, resp.data contains the result
-    }, function (err) {
-      console.error('ERR', err);
-    })
-  })
+  .controller('ScenarioInfo', function ($scope, $http, $stateParams, $window) {
 
-  .controller('SoundBoardCtrl', function ($scope, $window) {
     $scope.media = null;
 
     $scope.model = {
@@ -56,7 +48,7 @@ angular.module('starter.controllers', [])
       if ($scope.media) {
         $scope.media.pause();
       }
-      Console.log("I was here 1")
+      console.log("I was here 1")
       if ($window.cordova) {
         console.log("Play called on device");
         ionic.Platform.ready(function () {
