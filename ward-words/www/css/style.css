@@ -1,9 +1,32 @@
 /* Empty. Add your own CSS if you like */
 .item-complex .item-content, .item-radio .item-content {
-    position: absolute;
-    z-index: 2;
-    padding: 16px 49px 16px 16px;
-    border: none;
-    background-color: #fff;
-    bottom: 0px;
+  position: absolute;
+  z-index: 2;
+  padding: 16px 49px 16px 16px;
+  border: none;
+  background-color: rgba(0,0,0,0.2);
+  color: white;
+  font-weight: bold;
+  bottom: 0px;
+  width: 100%;
+}
+.top-label{
+  padding: 16px 49px 16px 16px;
+  position: absolute;
+  top: 0px;
+  background-color: #89c;
+}
+
+.button.button-light{
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 2px 16px;
+  border-radius: 15px;
+  margin-right: -20px;
+}
+
+.text-right{
+  text-align: right;
+  float: right;
 }
