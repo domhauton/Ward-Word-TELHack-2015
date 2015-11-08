@@ -7,12 +7,10 @@
                   show-reorder="model.showMove" >
           <ion-item class="item-avatar item-icon-right item-remove-animate"
                     ng-repeat="sound in model.sounds"
-                    style="height: 260px">
-            <img ng-src="{{sound.image}}" alt="" />
-            <h2 >{{ sound.title }}</h2 >
-
-            <p >{{ sound.desc }}</p >
-            <a onclick="this.firstChild.play()" class="button"><audio src="{{getSoundUri(sound.title)}}"></audio><i class="icon ion-volume-high"></i></a>
+                    style="height: 60px">
+            <h2 >{{ sound.name }}</h2 >
+            <p >{{ sound.description }}</p >
+            <a onclick="this.firstChild.play()" class="button"><audio src="{{getSoundPermissions(sound.url_name)}}"></audio><i class="icon ion-volume-high"></i></a>
           </ion-item >
         </ion-list >
       </ion-content >

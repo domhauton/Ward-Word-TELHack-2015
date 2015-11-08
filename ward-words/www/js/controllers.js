@@ -32,19 +32,19 @@ angular.module('starter.controllers', [])
 
     $scope.model = {
       showDelete: false,
-      showMove: false,
-      sounds: [
-        {
-          'title': 'balloon',
-          'image': 'img/animals/cow-icon.png',
-          'desc': 'Electric heart diagram',
-        }
-      ]
+      showMove: false
     };
 
-    $scope.getSoundUri = function(name){
-      var foo = "https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + name + ".mp3";
-      console.log(foo);
-      return $sce.trustAsResourceUrl(foo);
+    // https://sheetsu.com/apis/314441fd
+    $http.get('https://sheetsu.com/apis/314441fd').then(function (resp) {
+      console.log(resp.data.result);
+      $scope.model.sounds = resp.data.result;
+      // For JSON responses, resp.data contains the result
+    }, function (err) {
+      console.error('ERR', err);
+    });
+
+    $scope.getSoundPermissions = function(name){
+      return $sce.trustAsResourceUrl(name);
     };
   });
