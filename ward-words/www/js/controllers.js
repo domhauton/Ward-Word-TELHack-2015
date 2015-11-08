@@ -35,11 +35,16 @@ angular.module('starter.controllers', [])
       showMove: false
     };
 
-    // https://sheetsu.com/apis/314441fd
     $http.get('https://sheetsu.com/apis/314441fd').then(function (resp) {
-      console.log(resp.data.result);
       $scope.model.sounds = resp.data.result;
       // For JSON responses, resp.data contains the result
+    }, function (err) {
+      console.error('ERR', err);
+    });
+
+    $scope.scenarios = [];
+    $http.get('https://sheetsu.com/apis/6cc29636').then(function (resp) {
+      $scope.scenarios = resp.data.result;
     }, function (err) {
       console.error('ERR', err);
     });
@@ -49,7 +54,18 @@ angular.module('starter.controllers', [])
     };
 
     $scope.getScenarioId = function() {
-      console.log($stateParams.secnarioId);
       return $stateParams.secnarioId;
+    };
+
+    $scope.getScenarioImageUrl = function() {
+      var scenario = $scope.scenarios.filter(function (entry) { return entry.id === $stateParams.secnarioId; });
+      if(scenario.length === 0) {
+        return $sce.trustAsResourceUrl('http://placehold.it/800x600?text=Loading+image...');
+      } else {
+        if(scenario[0].image_labelled === undefined) {
+          return $sce.trustAsResourceUrl('http://placehold.it/800x600?text=Image not found.');
+        }
+        return $sce.trustAsResourceUrl(scenario[0].image_labelled);
+      }
     };
   });
