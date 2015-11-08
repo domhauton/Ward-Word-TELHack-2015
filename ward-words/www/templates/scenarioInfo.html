@@ -1,19 +1,22 @@
-<ion-view view-title="Playlist">
+<ion-view view-title="Ward Words">
   <ion-content>
-    <h1>Scenario Page</h1>
-    <ion-pane ng-controller="ScenarioInfo" >
-      <ion-content >
-        <ion-list show-delete="model.showDelete"
-                  show-reorder="model.showMove" >
+        <ion-list>
+           <ion-item
+                style="height: auto; padding: 0px;">
+                 <img src="http://i.imgur.com/0tslfUI.jpg" width="100%">
+          </ion-item >
+
           <ion-item class="item-avatar item-icon-right item-remove-animate"
-                    ng-repeat="sound in model.sounds"
-                    style="height: 60px">
+                    ng-repeat="sound in model.sounds" ng-if="sound.scenario == 1">
+            <img src="https://placehold.it/150/89c8c9/fff?text={{sound._id}}">
             <h2 >{{ sound.name }}</h2 >
             <p >{{ sound.description }}</p >
-            <a onclick="this.firstChild.play()" class="button"><audio src="{{getSoundPermissions(sound.url_name)}}"></audio><i class="icon ion-volume-high"></i></a>
+            <a onclick="this.firstChild.play()"><audio src="{{getSoundPermissions(sound.url_name)}}"></audio><i class="icon ion-volume-high"></i></a>
           </ion-item >
         </ion-list >
       </ion-content >
-    </ion-pane >
-  </ion-content>
+
 </ion-view>
+
+
+
