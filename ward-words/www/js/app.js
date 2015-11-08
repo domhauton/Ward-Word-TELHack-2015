@@ -40,7 +40,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('app.scenarioInfo', {
-    url: '/scenarioInfo/:playlistId',
+    url: '/scenarioInfo/:secnarioId',
     views: {
       'menuContent': {
         templateUrl: 'templates/scenarioInfo.html',

@@ -47,4 +47,9 @@ angular.module('starter.controllers', [])
     $scope.getSoundPermissions = function(name){
       return $sce.trustAsResourceUrl(name);
     };
+
+    $scope.getScenarioId = function() {
+      console.log($stateParams.secnarioId);
+      return $stateParams.secnarioId;
+    };
   });

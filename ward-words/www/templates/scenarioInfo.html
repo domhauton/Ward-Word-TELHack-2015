@@ -7,7 +7,8 @@
           </ion-item >
 
           <ion-item class="item-avatar item-icon-right item-remove-animate"
-                    ng-repeat="sound in model.sounds" ng-if="sound.scenario == 1">
+                    ng-repeat="sound in model.sounds"
+                    ng-if="sound.scenario == getScenarioId()">
             <img src="https://placehold.it/150/89c8c9/fff?text={{sound._id}}">
             <h2 >{{ sound.name }}</h2 >
             <p >{{ sound.description }}</p >
